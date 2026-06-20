@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crazy Voice Boxes</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(45deg,#ff006e,#8338ec,#3a86ff);
+    background-size:400% 400%;
+    animation:bgMove 8s infinite alternate;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+@keyframes bgMove{
+    from{background-position:0% 50%;}
+    to{background-position:100% 50%;}
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    color:white;
+    text-shadow:0 0 15px white;
+}
+
+.boxes{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.box{
+    width:180px;
+    height:180px;
+    border-radius:25px;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    animation:float 2s infinite alternate;
+}
+
+.box:hover{
+    transform:scale(1.15) rotate(10deg);
+}
+
+@keyframes float{
+    from{transform:translateY(0);}
+    to{transform:translateY(-15px);}
+}
+
+#message{
+    margin-top:30px;
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+    text-shadow:0 0 15px yellow;
+}
+
+.star{
+    position:absolute;
+    color:white;
+    font-size:25px;
+    animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+    from{transform:translateY(-100px);}
+    to{transform:translateY(110vh);}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎁 Click Any Box 🎁</h1>
+
+    <div class="boxes">
+        <div class="box" onclick="sohel()">SOHEL</div>
+        <div class="box" onclick="rehan()">REHAN</div>
+    </div>
+
+    <div id="message">✨ Choose a Box ✨</div>
+</div>
+
+<script>
+// Falling stars
+for(let i=0;i<40;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.innerHTML="⭐";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(3+Math.random()*4)+"s";
+    s.style.animationDelay=Math.random()*3+"s";
+    document.body.appendChild(s);
+}
+
+function speak(text){
+    speechSynthesis.cancel();
+    let msg=new SpeechSynthesisUtterance(text);
+    msg.rate=0.9;
+    msg.pitch=1.2;
+    speechSynthesis.speak(msg);
+}
+
+function sohel(){
+    document.getElementById("message").innerHTML="😂 SOHEL BOX OPENED!";
+    speak("Sohel, tu kaamchor hai , kaam karte jaa !");
+}
+
+function rehan(){
+    document.getElementById("message").innerHTML="🤣 REHAN BOX OPENED!";
+    speak("Rehan, tu aalasi hai sudhar zara!");
+}
+</script>
+
+</body>
+</html>
